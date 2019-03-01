@@ -1,10 +1,14 @@
 " Author: Radi <rad.iyadurai@gmail.com>
 " Description: Audrey LSP client
 
+call ale#Set('audrey_executable', 'audrey-ls')
+
 call ale#linter#Define('ruby', {
 \   'name': 'audrey',
-\   'lsp': 'socket',
-\   'address': '127.0.0.1:8123',
+\   'lsp': 'stdio',
 \   'language': 'ruby',
+\   'executable': {b -> ale#Var(b, 'audrey_executable')},
+\   'command': '%e',
 \   'project_root': function('ale#ruby#FindProjectRoot'),
+\   'initialization_options': {},
 \})
